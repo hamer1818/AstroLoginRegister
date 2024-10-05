@@ -1,0 +1,18 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+---
+
+<!DOCTYPE html>
+<html lang="tr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Giriş & Kayıt Sayfası</title>
+        <ViewTransitions />
+    </head>
+    <body class="bg-gradient-to-r from-orange-400 via-purple-500 to-orange-400 min-h-screen flex items-center justify-center">
+        <div class="container mx-auto flex items-center justify-center p-5">
+            <slot transition:animate="slide"/>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,34 @@
+---
+import Layout from "../layouts/Layout.astro"
+
+const { cookies, redirect } = Astro;
+
+const accessToken = cookies.get("sb-access-token");
+const refreshToken = cookies.get("sb-refresh-token");
+
+if (accessToken && refreshToken) {
+  return redirect("/dashboard");
+}
+
+---
+
+<Layout>
+    <div id="login-form" class="form-container bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
+        <!-- Giriş Formu -->
+        <h2 class="text-2xl font-semibold text-purple-600 text-center mb-6">Giriş Yap</h2>
+        <form method="post" action="/api/auth/signin" enctype="application/x-www-form-urlencoded">
+            <div class="mb-4">
+                <label for="email" class="block text-gray-700">E-posta</label>
+                <input type="email" id="email" class="w-full p-2 mt-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="E-posta adresinizi girin" name="email">
+            </div>
+            <div class="mb-6">
+                <label for="password" class="block text-gray-700">Şifre</label>
+                <input type="password" id="password" class="w-full p-2 mt-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="Şifrenizi girin" name="password">
+            </div>
+            <button type="submit" class="w-full bg-purple-600 text-white p-2 rounded hover:bg-purple-700 transition duration-300">Giriş Yap</button>
+        </form>
+        <p class="text-center text-gray-500 mt-4">Hesabınız yok mu? 
+            <a href="register" class="text-orange-500">Kayıt olun</a>
+        </p>
+    </div>
+</Layout>
