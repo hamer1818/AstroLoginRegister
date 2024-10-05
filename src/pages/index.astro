@@ -1,16 +1,181 @@
 ---
 
+
+if(Astro.request.method == 'POST'){
+    
+    try {
+        const data = await Astro.request.formData();
+        console.log(data);
+        if(data.get('action') == 'register'){
+            let name = data.get('name');
+            let email = data.get('email');
+            let password = data.get('password');
+
+            
+        }
+
+        
+        
+    } catch (e) {
+        return new Response('Bir hata oluştu: ' + e.message, { status: 500 });
+    }
+}
+
+
+
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş & Kayıt Sayfası</title>
+    <style>
+        /* Yumuşak geçiş animasyonu */
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
+
+        .fade-out {
+            opacity: 1;
+            animation: fadeOut 0.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+            }
+        }
+
+        /* Başarı mesajı için görünürlük */
+        .visible {
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .hidden {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-r from-orange-400 via-purple-500 to-orange-400 min-h-screen flex items-center justify-center">
+    <div class="container mx-auto flex items-center justify-center p-5">
+        <!-- Kayıt Başarılı Mesajı -->
+
+
+        <div id="login-form" class="form-container bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
+            <!-- Giriş Formu -->
+            <h2 class="text-2xl font-semibold text-purple-600 text-center mb-6">Giriş Yap</h2>
+            <form method="post" action="" enctype="application/x-www-form-urlencoded">
+                <!-- görünmeyen giriş bilgisi gönderme -->
+                <input type="hidden" name="action" value="login">
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700">E-posta</label>
+                    <input type="email" id="email" class="w-full p-2 mt-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="E-posta adresinizi girin" name="email">
+                </div>
+                <div class="mb-6">
+                    <label for="password" class="block text-gray-700">Şifre</label>
+                    <input type="password" id="password" class="w-full p-2 mt-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="Şifrenizi girin" name="password">
+                </div>
+                <button type="submit" class="w-full bg-purple-600 text-white p-2 rounded hover:bg-purple-700 transition duration-300">Giriş Yap</button>
+            </form>
+            <p class="text-center text-gray-500 mt-4">Hesabınız yok mu? 
+                <a class="text-orange-500" onclick="showRegister()">Kayıt olun</a>
+            </p>
+        </div>
+
+        <div id="register-form" class="form-container hidden bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
+            <div id="success-message" class="hidden bg-orange-100 border border-orange-400 text-orange-700 px-4 py-3 rounded relative" role="alert">
+                <strong class="font-bold">Başarılı!</strong>
+                <span class="block sm:inline">Kayıt işleminiz başarıyla tamamlandı.</span>
+            </div>
+            <!-- Kayıt Formu -->
+            <h2 class="text-2xl font-semibold text-orange-600 text-center mb-6 mt-3">Kayıt Ol</h2>
+            <form method="post" action="" enctype="application/x-www-form-urlencoded">
+                <!-- görünmeyen kayıt bilgisi gönderme -->
+                <input type="hidden" name="action" value="register">
+                <div class="mb-4">
+                    <label for="name" class="block text-gray-700">İsim</label>
+                    <input type="text" id="name" class="w-full p-2 mt-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Adınızı girin" name="name">
+                </div>
+                <div class="mb-4">
+                    <label for="email-register" class="block text-gray-700">E-posta</label>
+                    <input type="email" id="email-register" class="w-full p-2 mt-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="E-posta adresinizi girin" name="email">
+                </div>
+                <div class="mb-6">
+                    <label for="password-register" class="block text-gray-700">Şifre</label>
+                    <input type="password" id="password-register" class="w-full p-2 mt-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Şifrenizi girin" name="password">
+                </div>
+                <button type="submit" class="w-full bg-orange-500 text-white p-2 rounded hover:bg-orange-600 transition duration-300" onclick="registerUser(event)">Kayıt Ol</button>
+            </form>
+            <p class="text-center text-gray-500 mt-4">Zaten bir hesabınız var mı? 
+                <a class="text-purple-500" onclick="showLogin()">Giriş yapın</a>
+            </p>
+        </div>
+    </div>
+
+    <script is:inline>
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        const successMessage = document.getElementById('success-message');
+
+        function showRegister() {
+            if (loginForm) {
+                loginForm.classList.add('fade-out');
+                setTimeout(() => {
+                    loginForm.classList.add('hidden');
+                    loginForm.classList.remove('fade-out');
+                    if (registerForm) {
+                        registerForm.classList.remove('hidden');
+                        registerForm.classList.add('fade-in');
+                    }
+                }, 500); // Match the transition duration
+            }
+        }
+
+        function showLogin() {
+            if (registerForm) {
+                registerForm.classList.add('fade-out');
+                setTimeout(() => {
+                    registerForm.classList.add('hidden');
+                    registerForm.classList.remove('fade-out');
+                    if (loginForm) {
+                    loginForm.classList.remove('hidden');
+                    loginForm.classList.add('fade-in');
+                    }
+                }, 500); // Match the transition duration
+            }
+        }
+
+        function registerUser(event) {
+            event.preventDefault(); // Formun varsayılan davranışını durdur
+
+            // Başarı mesajını göster
+            if (successMessage) {
+                successMessage.classList.remove('hidden');
+                successMessage.classList.add('visible');
+            }
+
+            // Başarı mesajını birkaç saniye sonra gizle
+            setTimeout(() => {
+                if (successMessage) {
+                    successMessage.classList.remove('visible');
+                    successMessage.classList.add('hidden');
+                    showLogin(); // Kayıt işlemi başarılı olduğunda giriş formunu göster
+                }
+            }, 2000);  // Mesajın 3 saniye boyunca görünür kalması
+        }
+    </script>
+    
+</body>
 </html>
