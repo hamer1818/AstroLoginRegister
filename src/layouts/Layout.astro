@@ -1,5 +1,8 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
+
+const language = (Astro.cookies.get('lang')?.value == 'en') ? 'en' : 'tr';
+
 ---
 
 <!DOCTYPE html>
@@ -11,6 +14,7 @@ import { ViewTransitions } from 'astro:transitions';
         <ViewTransitions />
     </head>
     <body class="bg-gradient-to-r from-orange-400 via-purple-500 to-orange-400 min-h-screen flex items-center justify-center">
+        <a href={language == 'tr' ? '/en' : '/'} class="absolute top-5 right-5 text-white bg-black bg-opacity-50 px-2 py-1 rounded-lg">{language == 'tr' ? 'EN' : 'TR'}</a>
         <div class="container mx-auto flex items-center justify-center p-5">
             <slot transition:animate="slide"/>
         </div>

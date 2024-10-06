@@ -1,6 +1,6 @@
 ---
-import Layout from "../layouts/Layout.astro"
-import { supabase } from "../lib/supabase";
+import Layout from "../../layouts/Layout.astro"
+import { supabase } from "../../lib/supabase";
 
 
 if(Astro.request.method === 'POST'){
@@ -21,10 +21,10 @@ if(Astro.request.method === 'POST'){
         });
 
         if (error) {
-            return new Astro.Response(error.message, { status: 500 });
+            return new Response(error.message, { status: 500 });
         }
 
-        return Astro.redirect("/signin");
+        return Astro.redirect("/en/signin");
     } catch (error) {
         console.error(error)
     }
@@ -34,20 +34,20 @@ if(Astro.request.method === 'POST'){
 <Layout>
     <div id="register-form" class="form-container bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
         <!-- Kayıt Formu -->
-        <h2 class="text-2xl font-semibold text-orange-600 text-center mb-6 mt-3">Kayıt Ol</h2>
+        <h2 class="text-2xl font-semibold text-orange-600 text-center mb-6 mt-3">Register</h2>
         <form method="post">
             <div class="mb-4">
-                <label for="email-register" class="block text-gray-700">E-posta</label>
-                <input type="email" id="email-register" class="w-full p-2 mt-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="E-posta adresinizi girin" name="email">
+                <label for="email-register" class="block text-gray-700">E-mail</label>
+                <input type="email" id="email-register" class="w-full p-2 mt-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="E-mail" name="email">
             </div>
             <div class="mb-6">
-                <label for="password-register" class="block text-gray-700">Şifre</label>
-                <input type="password" id="password-register" class="w-full p-2 mt-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Şifrenizi girin" name="password">
+                <label for="password-register" class="block text-gray-700">Password</label>
+                <input type="password" id="password-register" class="w-full p-2 mt-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Password" name="password">
             </div>
             <button type="submit" class="w-full bg-orange-500 text-white p-2 rounded hover:bg-orange-600 transition duration-300">Kayıt Ol</button>
         </form>
-        <p class="text-center text-gray-500 mt-4">Zaten bir hesabınız var mı? 
-            <a href="/signin" class="text-purple-500">Giriş yapın</a>
+        <p class="text-center text-gray-500 mt-4">Have a account? 
+            <a href="/en/signin" class="text-purple-500">Login</a>
         </p>
     </div>
 </Layout>

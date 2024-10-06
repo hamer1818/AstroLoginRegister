@@ -10,5 +10,10 @@ export default defineConfig({
   integrations: [tailwind()],
   output: 'server',
   adapter: vercel(),
+
+  i18n: {
+    defaultLocale: 'tr',
+    locales: ['tr', 'en'],
+  }
   
 });
