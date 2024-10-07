@@ -1,4 +1,5 @@
 ---
+import Layout from "../../layouts/Layout.astro";
 import { supabase } from "../../lib/supabase";
 
 const { cookies, redirect } = Astro;
@@ -28,14 +29,7 @@ if (error) {
 
 const email = data.user?.email;
 ---
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome Page</title>
-</head>
-<body class="bg-gradient-to-r from-orange-400 via-purple-500 to-orange-400 min-h-screen flex items-center justify-center">
+<Layout>
     <div class="bg-white p-8 rounded-lg shadow-lg max-w-md text-center">
         <h1 class="text-4xl font-semibold text-purple-600 mb-4">Welcome, <span class="text-orange-500">{email}</span></h1>
         <p class="text-gray-600 text-lg mb-6">Good to see you here!</p>
@@ -45,5 +39,4 @@ const email = data.user?.email;
             </button>
         </form>
     </div>
-</body>
-</html>
+  </Layout>
