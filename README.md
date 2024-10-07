@@ -1,47 +1,22 @@
-# Astro Giriş & Kayıt Sayfası 
+# Astro SupaBase Simple Authentification
 
-Bu Astro uygulamsında örnek bir giriş ve kayıt sayfası oluşturulmuştur.
+## Description
 
-## kullanılan teknolojiler
+This is a simple example of how to use SupaBase Authentification with Astro.
 
-- supabase
-- typescript
-- Astro
-- tailwindcss
+## How to use
 
-## Kurulum
-
-```bash
-npm install
-```
-
-veya 
+1. Clone this repository `git clone https://github.com/hamer1818/AstroLoginRegister.git`
+2. Run `npm install` , `pnpm install` or `yarn install` to install the dependencies. (You can use any package manager you want but I recommend using `pnpm` because it's faster than `npm` and `yarn`).
+3. Create a `.env` file in the root of the project and add the following variables:
 
 ```bash
-yarn install
+VITE_SUPABASE_URL=YOUR_SUPABASE_URL
+VITE_SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY
 ```
 
-veya
+4. Run `npm run dev` , `pnpm dev` or `yarn dev` to start the development server.
 
-```bash
-pnpm install
-```
+## License
 
-## Çalıştırma
-
-```bash
-npm run dev
-```
-
-veya 
-
-```bash
-yarn run dev
-```
-
-veya
-
-```bash
-pnpm run dev
-```
-
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
