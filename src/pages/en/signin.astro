@@ -19,7 +19,7 @@ if(Astro.request.method === 'POST'){
   const password = formData.get("password")?.toString();
 
   if (!email || !password) {
-    return new Astro.Response("Email and password are required", { status: 400 });
+    return Astro.response("Email and password are required", { status: 400 });
   }
 
   const { data, error } = await supabase.auth.signInWithPassword({
@@ -28,7 +28,7 @@ if(Astro.request.method === 'POST'){
   });
 
   if (error) {
-    return new Astro.Response(error.message, { status: 500 });
+    return Astro.response(error.message, { status: 500 });
   }
 
   const { access_token, refresh_token } = data.session;
