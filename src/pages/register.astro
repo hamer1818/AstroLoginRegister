@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro"
 import { supabase } from "../lib/supabase";
+const { redirect } = Astro;
 
 
 if(Astro.request.method === 'POST'){
@@ -12,7 +13,7 @@ if(Astro.request.method === 'POST'){
         const password = formData.get("password")?.toString();
 
         if (!email || !password) {
-            return Astro.response("Email and password are required", { status: 400 });
+            return new Response("Email and password are required", { status: 400 });
         }
 
         const { error } = await supabase.auth.signUp({
@@ -21,10 +22,10 @@ if(Astro.request.method === 'POST'){
         });
 
         if (error) {
-            return Astro.response(error.message, { status: 500 });
+            return new Response(error.message, { status: 500 });
         }
 
-        return Astro.redirect("/signin");
+        return redirect("/signin");
     } catch (error) {
         console.error(error)
     }
