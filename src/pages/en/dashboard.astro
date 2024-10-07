@@ -2,7 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import { supabase } from "../../lib/supabase";
 
-const { cookies, redirect } = Astro;
+const { cookies, redirect,request } = Astro;
 
 const accessToken = cookies.get("sb-access-token");
 const refreshToken = cookies.get("sb-refresh-token");
@@ -28,12 +28,18 @@ if (error) {
 }
 
 const email = data.user?.email;
+
+if (request.method == 'POST'){
+  cookies.delete("sb-access-token", { path: "/" });
+  cookies.delete("sb-refresh-token", { path: "/" });
+  return redirect("/signin");
+};
 ---
 <Layout>
     <div class="bg-white p-8 rounded-lg shadow-lg max-w-md text-center">
         <h1 class="text-4xl font-semibold text-purple-600 mb-4">Welcome, <span class="text-orange-500">{email}</span></h1>
         <p class="text-gray-600 text-lg mb-6">Good to see you here!</p>
-        <form action="/api/auth/signout" method="post">
+        <form method="post">
             <button type="submit" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300">
                 Sign out
             </button>
