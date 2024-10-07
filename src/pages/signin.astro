@@ -17,6 +17,8 @@ if(Astro.request.method === 'POST'){
     const formData = await Astro.request.formData();
   const email = formData.get("email")?.toString();
   const password = formData.get("password")?.toString();
+  console.log(formData);
+  
 
   if (!email || !password) {
     return new Response("Email and password are required", { status: 400 });
