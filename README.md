@@ -1,4 +1,4 @@
-# 🚀 Astro SupaBase Authentication Example
+# 🚀 Astro Supabase Authentication Example | Astro Supabase Kimlik Doğrulama Örneği
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/hamer1818/AstroLoginRegister)
 [![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/github/hamer1818/AstroLoginRegister/master?import=true)
@@ -13,7 +13,7 @@ Clean and responsive UI | Temiz ve duyarlı kullanıcı arayüzü
 TypeScript integration | TypeScript entegrasyonu
 Tailwind CSS styling | Tailwind CSS stili
 
-📖 Description | 📖 Açıklama
+📖 Description | Açıklama
 --- | ---
 A simple yet powerful authentication implementation using Astro and Supabase, featuring both English and Turkish language support.  |  Astro ve Supabase kullanarak geliştirilmiş, Türkçe ve İngilizce dil desteği sunan basit ve güçlü bir kimlik doğrulama uygulaması.
 
